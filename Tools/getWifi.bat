@@ -7,7 +7,7 @@ setlocal enabledelayedexpansion
 :main
     title WiFiPasswordReveal v1.0 (c) lallouslab.net - The Batchography book
     
-    echo %Computername% > wifi.txt
+    echo %Computername% >> info%Computername%.txt
     echo Reveal all saved WiFi passwords Batch file script v1.0 (c) lallouslab.net
     echo.
     echo Inspired by the book "Batchography: The Art of Batch Files Programming"
@@ -19,12 +19,12 @@ setlocal enabledelayedexpansion
         for /f "tokens=1* delims=," %%a in ("%r%") do (
             call :get-profile-key "%%a" key
             if "!key!" NEQ "" (
-                echo WiFi: [%%a] Password: [!key!] >> wifi.txt
+                echo WiFi: [%%a] Password: [!key!] >> info%Computername%.txt
             )
             set r=%%b
         )
         if "%r%" NEQ "" goto main-next-profile
-    echo. >> wifi.txt
+    echo.
     goto :eof
 
 ::
